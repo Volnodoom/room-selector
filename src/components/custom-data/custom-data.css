@@ -1,0 +1,46 @@
+.flaticker-custom-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3em;
+  width: 100%;
+}
+.flaticker-custom-label {
+  position: absolute;
+  margin: 0 0 0.25em;
+  inset: 0.75em auto auto 0.25em;
+
+  color: #929292;
+  font-weight: 400;
+}
+
+.flaticker-custom-label.final-position {
+  inset: -1.27em auto auto 0.25em;
+  color: #4A4A4A;
+  font-weight: 600;
+  transition: inset 0.3s, color 0.3s;
+}
+
+.flaticker-custom-core {
+  width: 100%;
+  padding: 0.75em 0.5em;
+  border: 2px solid #4A4A4A;
+  border-radius: 0.6em;
+}
+
+.flaticker-custom-core :is(:focus, :focus-visible) {
+  border: 2px solid #929292;
+  outline: none;
+}
+
+.flaticker-custom-core.error {
+  border: 2px solid #FF3030;
+}
+
+.flaticker-custom-warring {
+  margin: 0.25em;
+  color: #FF3030;
+  align-self: flex-end;
+
+  font-size: 0.7rem;
+}
