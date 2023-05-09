@@ -13,7 +13,30 @@ const FormTitle = styled.h1`
   font-weight: 600;
 `;
 
+const FormButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const FormButton = styled.button`
+  padding: 0.5em 1.75em;
+
+  border: 2px solid ${({theme}) => theme.color.grey};
+  border-radius: 6.25em;
+  color:${({theme}) => theme.color.grey};
+  background-color: transparent;
+  transition: color 0.4s, background-color 0.4s;
+
+  :hover {
+    color: ${({theme}) => theme.color.white};
+    background-color: ${({theme}) => theme.color.grey};
+    transition: color 0.4s, background-color 0.4s;
+  }
+`;
+
 export {
   Form,
   FormTitle,
+  FormButton,
+  FormButtonWrapper,
 }

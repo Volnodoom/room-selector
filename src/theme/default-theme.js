@@ -5,6 +5,7 @@ export const defaultTheme = {
     white: '#FFFFFF',
     midWhite: '#E5E5E5',
     lightWhite: 'F3F3F3',
-    error: '#FF3030'
+    error: '#FF3030',
+    attention: '#F6D523'
   }
 }

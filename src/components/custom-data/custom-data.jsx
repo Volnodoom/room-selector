@@ -1,16 +1,29 @@
 import "flatpickr/dist/themes/material_green.css";
 import "./custom-data.css";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { FormErrorSubmitting } from "../../utils/constants";
 
 const CustomData = ({inputError}) => {
-  const isError = inputError === FormErrorSubmitting.Date
+  const hasError = inputError.some(value => value === FormErrorSubmitting.Date);
+
   const labelElement = useRef(null);
+  const flInstance = useRef(null);
+
+  const [isError, setIsError] = useState(hasError);
   const [currentDate, setCurrentDate] = useState(null);
+
   const timeRightNow = new Date();
 
-  const handChange = ([date]) => setCurrentDate(date );
+  const handleChange = ([date]) => {
+    setCurrentDate(date )
+    setIsError(false);
+  };
+  const handleLabelClick = () => flInstance.current.flatpickr.open();
+
+  useEffect(() => {
+    setIsError(hasError)
+  }, [hasError])
 
   useLayoutEffect(() => {
     if(currentDate) {
@@ -21,22 +34,29 @@ const CustomData = ({inputError}) => {
   useLayoutEffect(() => {
     if(isError) {
       document.querySelector('.flaticker-custom-core').classList.add('error');
+    } else {
+      document.querySelector('.flaticker-custom-core').classList.remove('error');
     }
   }, [isError]);
 
   return(
     <div className="flaticker-custom-wrapper">
-      <label className="flaticker-custom-label" ref={labelElement}>Дата и время</label>
+      <label
+        className="flaticker-custom-label"
+        ref={labelElement}
+        onClick={handleLabelClick}
+      >
+        Дата и время
+      </label>
       <Flatpickr
         className="flaticker-custom-core"
+        ref={flInstance}
         options={{
           minDate: timeRightNow,
-          minTime: timeRightNow,
         }}
         data-enable-time
         value={currentDate ?? ''}
-        minDate
-        onChange={handChange}
+        onChange={handleChange}
       />
       {isError ? <p className="flaticker-custom-warring">*Пожалуйста заполните поле</p> : <></>}
     </div>

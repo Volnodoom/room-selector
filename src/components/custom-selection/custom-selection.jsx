@@ -2,17 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import * as S from "./custom-selection.style";
 import { isArrowDown, isArrowUp, isEnter, isEscape, isTab } from "../../utils/utils";
 import { CUSTOM_MARK } from "../../utils/constants";
+import InputWrapper from "../styled-elements/input-wrapper";
+import Label from "../styled-elements/label";
+import Input from "../styled-elements/input";
 
 
 
-const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, selectionOpenTool, inputError}) => {
-  const isError = inputError === selectionName;
+const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, selectionOpenTool, inputError, inputName}) => {
+  const hasError = inputError.some(value => value === selectionName);
   const {activeSelection, setActiveSelection} = selectionTool;
   const {isOpenCustomSelector, setIsOpenCustomSelector} = selectionOpenTool;
 
   const optionElementList = useRef([]);
-  const [currentFocus, setCurrentFocus] = useState(null);
 
+  const [currentFocus, setCurrentFocus] = useState(null);
+  const [isError, setIsError] = useState(hasError);
   const [currentSelection, setCurrentSelection] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +31,10 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
       currentFocus.focus();
     }
   }, [currentFocus, isOpen])
+
+  useEffect(() => {
+    setIsError(hasError)
+  }, [hasError])
 
   const handleInputClick = () => {
     setIsOpenCustomSelector(true);
@@ -43,6 +51,8 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
     setCurrentFocus(optionElementList.current[index])
     setIsOpen(false);
     setIsOpenCustomSelector(false);
+    setIsError(false);
+
   }
 
   const handleOptionKeyDown = (selection, index) => (evt) => {
@@ -53,6 +63,7 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
       setCurrentSelection(selection);
       setIsOpen(false);
       setIsOpenCustomSelector(false);
+      setIsError(false);
     }
 
     if(isEscape(key)) {
@@ -95,15 +106,16 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
   };
 
   return(
-    <S.SelectionWrapper>
-      <S.SelectionLabel
+    <InputWrapper>
+      <Label
         isShown={currentSelection}
         onClick={handleInputClick}
         data-customselector={CUSTOM_MARK}
       >
         {selectionName}
-      </S.SelectionLabel>
-      <S.SelectionSubWrapper isSmall={isSmall} isOpen={isOpen}>
+      </Label>
+
+      <S.SelectionWrapper isSmall={isSmall} isOpen={isOpen}>
         <S.Selection isOpen={isOpen}>
           {
             optionsList.map((line, index) => (
@@ -119,17 +131,20 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
             ))
           }
         </S.Selection>
-      </S.SelectionSubWrapper>
-      <S.SelectInput
+      </S.SelectionWrapper>
+
+      <Input
         onClick={handleInputClick}
         isError={isError}
+        isShown={currentSelection}
         value={currentSelection ? currentSelection : ''}
+        name={inputName}
         type="text"
         data-customselector={CUSTOM_MARK}
         readOnly
       />
       {isError ? <S.SectionWarring>*Пожалуйста заполните поле</S.SectionWarring> : <></>}
-    </S.SelectionWrapper>
+    </InputWrapper>
   );
 };
 

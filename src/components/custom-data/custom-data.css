@@ -24,17 +24,22 @@
 .flaticker-custom-core {
   width: 100%;
   padding: 0.75em 0.5em;
-  border: 2px solid #4A4A4A;
+  border: 2px solid #929292;
   border-radius: 0.6em;
 }
 
-.flaticker-custom-core :is(:focus, :focus-visible) {
-  border: 2px solid #929292;
+.flaticker-custom-core:focus,
+.flaticker-custom-core:focus-visible {
   outline: none;
+  border: 2px solid #F6D523;
 }
 
 .flaticker-custom-core.error {
   border: 2px solid #FF3030;
+}
+
+.flaticker-custom-core.filled {
+  border: 2px solid #4A4A4A;
 }
 
 .flaticker-custom-warring {
