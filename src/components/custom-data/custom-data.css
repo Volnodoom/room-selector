@@ -1,0 +1,83 @@
+.flaticker-custom-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3em;
+  width: 100%;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.flaticker-custom-label {
+  position: absolute;
+  margin: 0 0 0.25em;
+  inset: 0.75em auto auto 0.25em;
+
+  color: #929292;
+  font-weight: 400;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-label {
+    position: static;
+    color: #4A4A4A;
+    font-weight: 600;
+    align-self: center;
+  }
+}
+
+.flaticker-custom-label.final-position {
+  inset: -1.27em auto auto 0.25em;
+  color: #4A4A4A;
+  font-weight: 600;
+  transition: inset 0.3s, color 0.3s;
+}
+
+.flaticker-custom-core {
+  width: 100%;
+  padding: 0.75em 0.5em;
+  border: 2px solid #929292;
+  border-radius: 0.6em;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-core {
+    width: 50%;
+  }
+}
+
+.flaticker-custom-core:focus,
+.flaticker-custom-core:focus-visible {
+  outline: none;
+  border: 2px solid #F6D523;
+}
+
+.flaticker-custom-core.error {
+  border: 2px solid #FF3030;
+}
+
+.flaticker-custom-core.filled {
+  border: 2px solid #4A4A4A;
+}
+
+.flaticker-custom-warring {
+  margin: 0.25em;
+  color: #FF3030;
+  align-self: flex-end;
+
+  font-size: 0.7rem;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-warring {
+    position: absolute;
+    inset: auto 0 -1.65em auto;
+
+    font-size: 0.8rem;
+  }
+}
