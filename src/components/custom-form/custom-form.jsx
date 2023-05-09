@@ -17,7 +17,7 @@ const CustomForm = () => {
   const[activeSelection, setActiveSelection] = useState(null);
   const[inputError, setInputError] = useState([]);
   const[isOpenCustomSelector, setIsOpenCustomSelector] = useState(false);
-  const[isReset, setIsReset] = useState(false);
+  const[version, setVersion] = useState(0);
 
   const handleClickOutOfCustom = (evt) => {
     const isNotCustom = evt.target.dataset.customselector !== CUSTOM_MARK;
@@ -61,7 +61,7 @@ const CustomForm = () => {
   }
 
   const handleResetClick = () => {
-    setIsReset(true);
+    setVersion(version + 1);
   }
 
   return(
@@ -69,12 +69,12 @@ const CustomForm = () => {
       onClick={handleClickOutOfCustom}
       onSubmit={handleSubmit}
       ref={formElement}
+      key={version}
     >
       <S.FormTitle>Форма бронирования переговорной</S.FormTitle>
       <CustomSelection
         selectionTool={{activeSelection, setActiveSelection}}
         selectionOpenTool={{isOpenCustomSelector, setIsOpenCustomSelector}}
-        manageReset={{isReset, setIsReset}}
         selectionName={SelectionType.Tower}
         inputName={InputName.Tower}
         optionsList={PLACE_NAMES}
@@ -85,7 +85,6 @@ const CustomForm = () => {
       <CustomSelection
         selectionTool={{activeSelection, setActiveSelection}}
         selectionOpenTool={{isOpenCustomSelector, setIsOpenCustomSelector}}
-        manageReset={{isReset, setIsReset}}
         selectionName={SelectionType.Flor}
         inputName={InputName.Flor}
         optionsList={levelNumbers}
@@ -95,7 +94,6 @@ const CustomForm = () => {
       <CustomSelection
         selectionTool={{activeSelection, setActiveSelection}}
         selectionOpenTool={{isOpenCustomSelector, setIsOpenCustomSelector}}
-        manageReset={{isReset, setIsReset}}
         selectionName={SelectionType.Room}
         inputName={InputName.Room}
         optionsList={roomsNumbers}
@@ -104,10 +102,9 @@ const CustomForm = () => {
 
       <CustomData
         inputError={inputError}
-        manageReset={{isReset, setIsReset}}
       />
 
-      <CustomComments manageReset={{isReset, setIsReset}}/>
+      <CustomComments />
 
       <S.FormButtonWrapper>
         <S.FormButton type="reset" onClick={handleResetClick}>Очистить</S.FormButton>

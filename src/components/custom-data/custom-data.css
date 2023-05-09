@@ -5,6 +5,14 @@
   margin-bottom: 3em;
   width: 100%;
 }
+
+@media (min-width: 1100px) {
+  .flaticker-custom-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
 .flaticker-custom-label {
   position: absolute;
   margin: 0 0 0.25em;
@@ -12,6 +20,15 @@
 
   color: #929292;
   font-weight: 400;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-label {
+    position: static;
+    color: #4A4A4A;
+    font-weight: 600;
+    align-self: center;
+  }
 }
 
 .flaticker-custom-label.final-position {
@@ -26,6 +43,12 @@
   padding: 0.75em 0.5em;
   border: 2px solid #929292;
   border-radius: 0.6em;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-core {
+    width: 50%;
+  }
 }
 
 .flaticker-custom-core:focus,
@@ -48,4 +71,13 @@
   align-self: flex-end;
 
   font-size: 0.7rem;
+}
+
+@media (min-width: 1100px) {
+  .flaticker-custom-warring {
+    position: absolute;
+    inset: auto 0 -1.65em auto;
+
+    font-size: 0.8rem;
+  }
 }

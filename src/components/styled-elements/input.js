@@ -15,6 +15,10 @@ const Input = styled.input`
     border: 2px solid ${({theme}) => theme.color.attention};
     outline: none;
   }
+
+  @media (min-width: 1100px) {
+    width: 50%;
+  }
 `;
 
 export default Input;

@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import InputWrapper from "../styled-elements/input-wrapper";
 import Label from "../styled-elements/label";
 import * as S from "./custom-comments.style";
-import Input from "../styled-elements/input";
 
-const CustomComments = ({manageReset}) => {
-  const {isReset, setIsReset} = manageReset;
-
+const CustomComments = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const [currentContent, setCurrentContent] = useState('');
@@ -27,7 +24,6 @@ const CustomComments = ({manageReset}) => {
 
   const handleFocus = () => {
     setIsFocus(true);
-    setIsReset(false);
   };
   const handleBlur = () => setIsFocus(false);
 
@@ -45,7 +41,7 @@ const CustomComments = ({manageReset}) => {
         Комментарий
       </Label>
 
-      <Input
+      <S.CommentsInput
         as='textarea'
         isShown={isShown}
         onChange={handleOnChange}

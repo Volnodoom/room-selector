@@ -4,9 +4,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { FormErrorSubmitting } from "../../utils/constants";
 
-const CustomData = ({inputError, manageReset}) => {
+const CustomData = ({inputError}) => {
   const hasError = inputError.some(value => value === FormErrorSubmitting.Date);
-  const {isReset, setIsReset} = manageReset;
 
   const labelElement = useRef(null);
   const flInstance = useRef(null);
@@ -17,21 +16,14 @@ const CustomData = ({inputError, manageReset}) => {
   const timeRightNow = new Date();
 
   const handleChange = ([date]) => {
-    setCurrentDate(date )
+    setCurrentDate(date);
     setIsError(false);
-    setIsReset(false);
   };
   const handleLabelClick = () => flInstance.current.flatpickr.open();
 
   useEffect(() => {
-    setIsError(hasError)
+    setIsError(hasError);
   }, [hasError])
-
-  useEffect(() => {
-    if(isReset) {
-      flInstance.current.flatpickr.clear();
-    }
-  }, [isReset])
 
   useLayoutEffect(() => {
     if(currentDate) {
@@ -46,6 +38,8 @@ const CustomData = ({inputError, manageReset}) => {
       document.querySelector('.flaticker-custom-core').classList.remove('error');
     }
   }, [isError]);
+
+  console.log({hasError, isError})
 
   return(
     <div className="flaticker-custom-wrapper">

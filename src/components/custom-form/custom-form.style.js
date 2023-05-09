@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
 const Form = styled.form`
-  margin: 4em 0;
-  padding: 0 1.25em;
+  margin: 4em 0 0;
+  padding: 0 1.25em 3em;
   width: 23.3em;
+
+  @media (min-width: 1100px) {
+    width: 57.5em;
+    padding-inline: 15em;
+  }
 `;
 
 const FormTitle = styled.h1`

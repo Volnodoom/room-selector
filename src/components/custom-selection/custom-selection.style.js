@@ -25,6 +25,10 @@ const SelectionWrapper = styled.div`
   border: 1px solid ${({theme}) => theme.color.lightWhite};
   border-radius: 0.5em;
   box-shadow: 0px 16px 20px -8px rgba(17, 12, 34, 0.1);
+
+  @media (min-width: 1100px) {
+    width: 50%;
+  }
 `;
 
 const Selection = styled.ul`
@@ -71,6 +75,13 @@ const SectionWarring = styled.p`
   align-self: flex-end;
 
   font-size: 0.7rem;
+
+  @media (min-width: 1100px) {
+    position: absolute;
+    inset: auto 0 -1.65em auto;
+
+    font-size: 0.8rem;
+  }
 `;
 
 export {

@@ -16,18 +16,16 @@ const CustomSelection = ({
   selectionOpenTool,
   inputError,
   inputName,
-  manageReset
 }) => {
   const hasError = inputError.some(value => value === selectionName);
   const {activeSelection, setActiveSelection} = selectionTool;
   const {isOpenCustomSelector, setIsOpenCustomSelector} = selectionOpenTool;
-  const {isReset, setIsReset} = manageReset;
 
   const optionElementList = useRef([]);
 
   const [currentFocus, setCurrentFocus] = useState(null);
-  const [isError, setIsError] = useState(hasError);
   const [currentSelection, setCurrentSelection] = useState(null);
+  const [isError, setIsError] = useState(hasError);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -46,12 +44,6 @@ const CustomSelection = ({
     setIsError(hasError)
   }, [hasError])
 
-  useEffect(() => {
-    if(isReset) {
-      setCurrentSelection(null);
-    }
-  }, [isReset])
-
   const handleInputClick = () => {
     setIsOpenCustomSelector(true);
     setIsOpen(true);
@@ -68,7 +60,6 @@ const CustomSelection = ({
     setIsOpen(false);
     setIsOpenCustomSelector(false);
     setIsError(false);
-    setIsReset(false);
   }
 
   const handleOptionKeyDown = (selection, index) => (evt) => {
@@ -80,7 +71,6 @@ const CustomSelection = ({
       setIsOpen(false);
       setIsOpenCustomSelector(false);
       setIsError(false);
-      setIsReset(false);
     }
 
     if(isEscape(key)) {
