@@ -8,10 +8,20 @@ import Input from "../styled-elements/input";
 
 
 
-const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, selectionOpenTool, inputError, inputName}) => {
+const CustomSelection = ({
+  selectionName,
+  optionsList,
+  isSmall,
+  selectionTool,
+  selectionOpenTool,
+  inputError,
+  inputName,
+  manageReset
+}) => {
   const hasError = inputError.some(value => value === selectionName);
   const {activeSelection, setActiveSelection} = selectionTool;
   const {isOpenCustomSelector, setIsOpenCustomSelector} = selectionOpenTool;
+  const {isReset, setIsReset} = manageReset;
 
   const optionElementList = useRef([]);
 
@@ -36,6 +46,12 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
     setIsError(hasError)
   }, [hasError])
 
+  useEffect(() => {
+    if(isReset) {
+      setCurrentSelection(null);
+    }
+  }, [isReset])
+
   const handleInputClick = () => {
     setIsOpenCustomSelector(true);
     setIsOpen(true);
@@ -52,7 +68,7 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
     setIsOpen(false);
     setIsOpenCustomSelector(false);
     setIsError(false);
-
+    setIsReset(false);
   }
 
   const handleOptionKeyDown = (selection, index) => (evt) => {
@@ -64,6 +80,7 @@ const CustomSelection = ({selectionName, optionsList, isSmall, selectionTool, se
       setIsOpen(false);
       setIsOpenCustomSelector(false);
       setIsError(false);
+      setIsReset(false);
     }
 
     if(isEscape(key)) {

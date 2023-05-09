@@ -4,7 +4,9 @@ import Label from "../styled-elements/label";
 import * as S from "./custom-comments.style";
 import Input from "../styled-elements/input";
 
-const CustomComments = () => {
+const CustomComments = ({manageReset}) => {
+  const {isReset, setIsReset} = manageReset;
+
   const [isFocus, setIsFocus] = useState(false);
   const [isShown, setIsShown] = useState(false);
   const [currentContent, setCurrentContent] = useState('');
@@ -23,7 +25,10 @@ const CustomComments = () => {
     setIsShown(false);
   }, [currentContent, isFocus])
 
-  const handleFocus = () => setIsFocus(true);
+  const handleFocus = () => {
+    setIsFocus(true);
+    setIsReset(false);
+  };
   const handleBlur = () => setIsFocus(false);
 
   const handleOnChange = (evt) => {

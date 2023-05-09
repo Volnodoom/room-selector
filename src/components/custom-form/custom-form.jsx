@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CHART_ROOM_NUMBER, CUSTOM_MARK, ELEVATION_END, ELEVATION_START, PLACE_NAMES, InputName, SelectionType, FormErrorSubmitting } from "../../utils/constants";
 import CustomSelection from "../custom-selection/custom-selection";
 import * as S from "./custom-form.style";
@@ -17,6 +17,7 @@ const CustomForm = () => {
   const[activeSelection, setActiveSelection] = useState(null);
   const[inputError, setInputError] = useState([]);
   const[isOpenCustomSelector, setIsOpenCustomSelector] = useState(false);
+  const[isReset, setIsReset] = useState(false);
 
   const handleClickOutOfCustom = (evt) => {
     const isNotCustom = evt.target.dataset.customselector !== CUSTOM_MARK;
@@ -59,6 +60,10 @@ const CustomForm = () => {
     console.log(JSON.stringify(result));
   }
 
+  const handleResetClick = () => {
+    setIsReset(true);
+  }
+
   return(
     <S.Form
       onClick={handleClickOutOfCustom}
@@ -69,6 +74,7 @@ const CustomForm = () => {
       <CustomSelection
         selectionTool={{activeSelection, setActiveSelection}}
         selectionOpenTool={{isOpenCustomSelector, setIsOpenCustomSelector}}
+        manageReset={{isReset, setIsReset}}
         selectionName={SelectionType.Tower}
         inputName={InputName.Tower}
         optionsList={PLACE_NAMES}
@@ -79,6 +85,7 @@ const CustomForm = () => {
       <CustomSelection
         selectionTool={{activeSelection, setActiveSelection}}
         selectionOpenTool={{isOpenCustomSelector, setIsOpenCustomSelector}}
+        manageReset={{isReset, setIsReset}}
         selectionName={SelectionType.Flor}
         inputName={InputName.Flor}
         optionsList={levelNumbers}
@@ -88,6 +95,7 @@ const CustomForm = () => {
       <CustomSelection
         selectionTool={{activeSelection, setActiveSelection}}
         selectionOpenTool={{isOpenCustomSelector, setIsOpenCustomSelector}}
+        manageReset={{isReset, setIsReset}}
         selectionName={SelectionType.Room}
         inputName={InputName.Room}
         optionsList={roomsNumbers}
@@ -96,12 +104,13 @@ const CustomForm = () => {
 
       <CustomData
         inputError={inputError}
+        manageReset={{isReset, setIsReset}}
       />
 
-      <CustomComments />
+      <CustomComments manageReset={{isReset, setIsReset}}/>
 
       <S.FormButtonWrapper>
-        <S.FormButton type="reset">Очистить</S.FormButton>
+        <S.FormButton type="reset" onClick={handleResetClick}>Очистить</S.FormButton>
         <S.FormButton type="submit">Отправить</S.FormButton>
       </S.FormButtonWrapper>
     </S.Form>
